@@ -1,0 +1,30 @@
+--------------------------------------------------------------------------------------------------------
+2> STEPS: Instance Extensions
+--------------------------------------------------------------------------------------------------------
+1> Find how many instance extences are supported by vulkan driver of this version. 
+   and keep the count in local variable.
+2> Allocate and Fill struct VkExtensionProperties array corresponding to above count.
+3> Fill and Display a local string array of extension names obtained from the VkExtensionProperties.
+4> As not required onwords, here free VkExtensionProperties.
+5> Find whether above extension names contains our 2 required extension
+	1> VK_KHR_SURFACE_EXTENSION_NAME
+	2> VK_KHR_WIN32_SURFACE_EXTENSION_NAME
+	Accordingly set two global variables 1-> reqired extension count 2-> reqired extensions array
+
+6> as not needed hencefore, free local string array.
+7> print whether our vulkan driver supports the required extensions or not.
+8> print only supported extension names. 
+
+--------------------------------------------------------------------------------------------------------
+3> STEPS: Instance Creation
+--------------------------------------------------------------------------------------------------------
+in initailise()
+{
+	1> As explained before, fill and initailise required extension names and count in global variable.
+	2> initialize struct VkApplicationInfo.
+	3> initialise struct VkInstanceCreateInfo by using information from step1 and step2
+	4> call vkCreateInstance() to get vkInstance in global variable and do error checking.
+}
+
+5> destroy vkInstance in uninitialize().
+--------------------------------------------------------------------------------------------------------
