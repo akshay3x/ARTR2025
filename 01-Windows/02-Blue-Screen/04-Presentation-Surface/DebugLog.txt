@@ -1,0 +1,66 @@
+
+DEBUG:[WinMain()][SUCCESS] Log File Created Successfully
+DEBUG:[WinMain()][SUCCESS] Class Registered Successfully
+DEBUG:[WndProc()] WM_CREATE Recieved
+DEBUG:[WinMain()][SUCCESS] CreateWindowEx() Done -> Window Created
+
+DEBUG:------------------------------------Inside[initialize()]------------------------------------
+
+DEBUG:------------------------------------Inside[createVulkanInstance()]------------------------------------
+
+DEBUG:------------------------------------Inside[fillInstanceExtensionNames()]------------------------------------
+DEBUG:[fillInstanceExtensionNames][SUCCESS] vkEnumerateInstanceExtensionProperties() first call
+DEBUG:[fillInstanceExtensionNames][SUCCESS] Memory allocated for VkExtensionProperties array
+DEBUG:[fillInstanceExtensionNames][SUCCESS] vkEnumerateInstanceExtensionProperties() Second call
+DEBUG:[fillInstanceExtensionNames][SUCCESS] Memory allocated for instanceExtensionNames_array
+DEBUG:[fillInstanceExtensionNames][INFO] Vulkan instance Extension Name[0] = VK_KHR_surface
+DEBUG:[fillInstanceExtensionNames][INFO] Vulkan instance Extension Name[1] = VK_KHR_win32_surface
+DEBUG:[fillInstanceExtensionNames][INFO] Vulkan instance Extension Name[2] = VK_KHR_external_memory_capabilities
+DEBUG:[fillInstanceExtensionNames][INFO] Vulkan instance Extension Name[3] = VK_KHR_external_semaphore_capabilities
+DEBUG:[fillInstanceExtensionNames][INFO] Vulkan instance Extension Name[4] = VK_KHR_external_fence_capabilities
+DEBUG:[fillInstanceExtensionNames][INFO] Vulkan instance Extension Name[5] = VK_KHR_get_physical_device_properties2
+DEBUG:[fillInstanceExtensionNames][INFO] Vulkan instance Extension Name[6] = VK_KHR_get_surface_capabilities2
+DEBUG:[fillInstanceExtensionNames][INFO] Vulkan instance Extension Name[7] = VK_KHR_device_group_creation
+DEBUG:[fillInstanceExtensionNames][INFO] Vulkan instance Extension Name[8] = VK_EXT_swapchain_colorspace
+DEBUG:[fillInstanceExtensionNames][INFO] Vulkan instance Extension Name[9] = VK_KHR_display
+DEBUG:[fillInstanceExtensionNames][INFO] Vulkan instance Extension Name[10] = VK_KHR_get_display_properties2
+DEBUG:[fillInstanceExtensionNames][INFO] Vulkan instance Extension Name[11] = VK_KHR_surface_protected_capabilities
+DEBUG:[fillInstanceExtensionNames][INFO] Vulkan instance Extension Name[12] = VK_EXT_debug_report
+DEBUG:[fillInstanceExtensionNames][INFO] Vulkan instance Extension Name[13] = VK_EXT_debug_utils
+DEBUG:[fillInstanceExtensionNames][INFO] Vulkan instance Extension Name[14] = VK_EXT_direct_mode_display
+DEBUG:[fillInstanceExtensionNames][INFO] Vulkan instance Extension Name[15] = VK_EXT_surface_maintenance1
+DEBUG:[fillInstanceExtensionNames][INFO] Vulkan instance Extension Name[16] = VK_NV_external_memory_capabilities
+DEBUG:[fillInstanceExtensionNames][INFO] Vulkan instance Extension Name[17] = VK_KHR_portability_enumeration
+DEBUG:[fillInstanceExtensionNames][INFO] Vulkan instance Extension Name[18] = VK_LUNARG_direct_driver_loading
+DEBUG:[fillInstanceExtensionNames][SUCCESS] VK_KHR_SURFACE_EXTENSION_NAME found
+DEBUG:[fillInstanceExtensionNames][SUCCESS] VK_KHR_WIN32_SURFACE_EXTENSION_NAME found
+DEBUG:[fillInstanceExtensionNames][INFO] Enabled Extension Name [0]= VK_KHR_surface
+DEBUG:[fillInstanceExtensionNames][INFO] Enabled Extension Name [1]= VK_KHR_win32_surface
+DEBUG:------------------------------------Done [fillInstanceExtensionNames()]------------------------------------
+
+DEBUG:[createVulkanInstance][SUCCESS] fillInstanceExtensionNames()
+DEBUG:[createVulkanInstance][SUCCESS]
+DEBUG:------------------------------------Done [createVulkanInstance()]------------------------------------
+
+DEBUG:[initialize][SUCCESS] createVulkanInstance()
+
+DEBUG:------------------------------------Inside[getSupportedSurface()]------------------------------------
+DEBUG:[getSupportedSurface][SUCCESS] vkCreateWin32SurfaceKHR()
+DEBUG:------------------------------------Done [getSupportedSurface()]------------------------------------
+
+DEBUG:[initialize][SUCCESS] getSupportedSurface()
+DEBUG:------------------------------------Done [initialize()]------------------------------------
+
+
+DEBUG:[WINMAIN()][SUCCESS] initialize()
+DEBUG:[WINMAIN()][SUCCESS] ShowWindow()
+DEBUG:[WINMAIN()][SUCCESS] SetForegroundWindow()
+DEBUG:[WINMAIN()][SUCCESS] SetFocus()
+DEBUG:[WndProc()] WM_DESTROY Recieved
+
+DEBUG:------------------------------------Inside[uninitialize()]------------------------------------
+DEBUG:[uninitialize()][SUCCESS] vkDestroySurfaceKHR()
+DEBUG:[uninitialize()][SUCCESS] vkDestroyInstance()
+DEBUG:------------------------------------Done [uninitialize()]------------------------------------
+
+DEBUG:[uninitialize()] Debug File Closed
