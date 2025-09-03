@@ -1,0 +1,131 @@
+--------------------------------------------------------------------------------------------------------
+2> STEPS: Instance Extensions
+--------------------------------------------------------------------------------------------------------
+1> Find how many instance extences are supported by vulkan driver of this version. 
+   and keep the count in local variable.
+2> Allocate and Fill struct VkExtensionProperties array corresponding to above count.
+3> Fill and Display a local string array of extension names obtained from the VkExtensionProperties.
+4> As not required onwords, here free VkExtensionProperties.
+5> Find whether above extension names contains our 2 required extension
+	1> VK_KHR_SURFACE_EXTENSION_NAME
+	2> VK_KHR_WIN32_SURFACE_EXTENSION_NAME
+	Accordingly set two global variables 1-> reqired extension count 2-> reqired extensions array
+
+6> as not needed hencefore, free local string array.
+7> print whether our vulkan driver supports the required extensions or not.
+8> print only supported extension names. 
+
+--------------------------------------------------------------------------------------------------------
+3> STEPS: Instance Creation
+--------------------------------------------------------------------------------------------------------
+in initailise()
+{
+	1> As explained before, fill and initailise required extension names and count in global variable.
+	2> initialize struct VkApplicationInfo.
+	3> initialise struct VkInstanceCreateInfo by using information from step1 and step2
+	4> call vkCreateInstance() to get vkInstance in global variable and do error checking.
+}
+
+5> destroy vkInstance in uninitialize().
+
+
+--------------------------------------------------------------------------------------------------------
+4> STEPS: Presetation Surface Steps
+--------------------------------------------------------------------------------------------------------
+STEPS>
+1> Declare a global varible to hold presentation surface object.
+2> Declare and memset platform specific windows, Linux, Android, etc surfaceCreateInfoStructure.
+3> Initialize it perticularly its hInstance and hwnd members
+4> Now Call vkCreateWin32SurfaceKHR() to create presentation surface object.
+5> Chages in uninitialize()
+
+--------------------------------------------------------------------------------------------------------
+5> STEPS: Get Physical Device
+--------------------------------------------------------------------------------------------------------
+1> Declare 3 global variables.
+	i>   For selected physical device.
+	ii>  For selected Queue Family Index
+	iii> For Physical Device's Properties(required in later steps)
+2> Call vkEnumeratePhysicalDevices() to get physical device count.
+3> Allocate VkPhysicalDeviceArray array according physical device count 
+4> Call vkEnumeratePhysicalDevices() again to fill above array (physical device names).
+5> Start Loop using physical device count and physical device array.
+	NOTE: Declare a boolean bFound variable before this loop which will decide whether we found desired physical device or not.
+	      Inside this Loop
+		  a> Declare a local varible to loop count.
+		  b> Call vkGetPhysicalDeviceQueueFamilyProperties() To initialize above queue count variable.
+		  c> Declare and allocate VkQueueFamilyPropertiesArray array according to above queue count variable.
+		  d> Call vkGetPhysicalDeviceQueueFamilyProperties() again to fill above array.
+		  e> Declare VkBool32 type array and allocate it using above queue count variable.
+		  f> start nested loop and fill VkBool32 type array By calling vkGetPhysicalDeviceSurfaceSupportKHR().
+		  g> start another nested(inside main)loop and check whether physical device in its array with its Queue family "has" Graphics Bit or not.
+		     if yes then this is selected physical device. Assign it global variable.
+			 Similarly this index is selected queue family index, assign it to global variable also/too.
+			 and set bFound = TRUE and break from from second nested(inside main) loop. 
+		  h> Now we are back in main loop. So free the VkQueueFamilyPropertiesArray and VkBool32.
+		  i> still being in main loop according to bFound variable break out of main loop.
+		  j> Free physical device array.
+6> Do error checking according to bFound.
+7> memset the global physical device memory proprty structure.
+8> Initialize above structure with vkGetPhysicalDeviceMemoryProperties.
+9> Declare a local structure variable VkPhysicalDeviceFeatures. Memset it and initialize it by calling vkGetPhysicalDeviceFeatures().
+10> By using tissilation Shader member of above structure check selected device's tissilation shader property/support.
+11> By using geometry Shader member of above structure check selected device's geometry shader property/support.
+12> There is no need destroy/free/uninitialize selected physical device because, later we will create vulkan logical device 
+	which needs to be destroyed, which will destroy selected physical device.   
+--------------------------------------------------------------------------------------------------------
+6> STEPS: Print VK_INFO
+--------------------------------------------------------------------------------------------------------
+1> Remove local declaration of physical device count and physical device array and declare it globally, from getPhysicalDevice().
+2> Accordingly remove physical device array freeing code block from if(bFound == VK_TRUE) block, and we will later write 
+   this freeing code block in print vk info function.
+3> Write printVKInfo() user defined function with following steps:
+	a> Start a loop using global physical device count and inside it declare and memset VK_PHYSICAL_DEVICE_PROPERTIES 
+	structure variable.
+	b> Initialize this structure variable by calling vkGetPhysicalDeviceProperties vulkan API.
+	c> Print vulkan API version using "apiVersion" member of the structure. this requires 3 vulkan macros.
+	d> Print device name by using "deviceName" member of structure.
+	e> Use "deviceType" member of structure in a switch case block and accordingly print device type.
+	f> Print hexadecimal vendorID of device "vedorID" member of structure.
+	g> Print hexadecimal deviceID using "deviceID" member of structure.
+		NOTE: for sake of the completeness we can repeat step 5 (steps a tp h) from getPhysicalDevice() function.
+			  but now instead of assingning selected queue and selected device print wheher this device supports
+			  Graphics bit, compute bit, transfer bit using if-else-if blocks/ladder.
+			  similarly we also can repeat device fetures from get physical device function and 
+			  can print all around 50+ device features including tissilation and geometric shader support.
+	h> Free physical device array here which we removed from if(bFound == VK_TRUE) block of getPhysicalDevice().
+--------------------------------------------------------------------------------------------------------
+7> STEPS: Device Extensions
+--------------------------------------------------------------------------------------------------------
+Use the same logic/steps of getting instance extensions, we are going to retrive device extensions.
+
+--------------------------------------------------------------------------------------------------------
+8> STEPS: Vulkan Device
+--------------------------------------------------------------------------------------------------------
+1> Create userdefined function createVulkanDevice()
+2> Call previviously created fillDeviceExtensionNames() in it.
+3> Declare and initialize VkDeviceCreateInfoStructure.
+4> Use previously obtained device extension count and device extension array to initialize this structure.
+5> Now Call vkCreateDevice() vulkan API to create actual device and do error checking.
+6> Destroy this device when done. 
+	IMP NOTE: Before destroying the device ensure all operations on that device are finished. 
+			  Till that wait on that device.
+--------------------------------------------------------------------------------------------------------
+9> STEPS: Device Queue
+--------------------------------------------------------------------------------------------------------
+1> Call vkGetDeviceQueue() using newly created vkDevice, selected family index, 0th queue in that queue 
+   family.
+   NOTE: when we create vkdevice, vkqueue are created/constructed.
+		 if so we destroy vkdevice results release vkqueues.
+--------------------------------------------------------------------------------------------------------
+10> Surface Format And Color Space 
+--------------------------------------------------------------------------------------------------------
+1> Call vkGetPhysicalDeviceSurfaceFormatsKHR() to retrieve the count of supported color formats.
+2> Declare and allocate array of VkGetPhysicalDeviceSurfaceFormat
+	VK_COLOR_SPACE_SRGB_NONLINEAR_KHR
+	VK_FORMAT_B8G8R8A8_SRGB
+3> Call again vkGetPhysicalDeviceSurfaceFormatsKHR() to fill array.
+4> According to contents above filled array decide the surface color format and surface color space.
+5> free the allocated array.
+--------------------------------------------------------------------------------------------------------
+
