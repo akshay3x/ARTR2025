@@ -1,0 +1,264 @@
+--------------------------------------------------------------------------------------------------------
+2> STEPS: Instance Extensions
+--------------------------------------------------------------------------------------------------------
+1> Find how many instance extences are supported by vulkan driver of this version. 
+   and keep the count in local variable.
+2> Allocate and Fill struct VkExtensionProperties array corresponding to above count.
+3> Fill and Display a local string array of extension names obtained from the VkExtensionProperties.
+4> As not required onwords, here free VkExtensionProperties.
+5> Find whether above extension names contains our 2 required extension
+	1> VK_KHR_SURFACE_EXTENSION_NAME
+	2> VK_KHR_WIN32_SURFACE_EXTENSION_NAME
+	Accordingly set two global variables 1-> reqired extension count 2-> reqired extensions array
+
+6> as not needed hencefore, free local string array.
+7> print whether our vulkan driver supports the required extensions or not.
+8> print only supported extension names. 
+
+--------------------------------------------------------------------------------------------------------
+3> STEPS: Instance Creation
+--------------------------------------------------------------------------------------------------------
+in initailise()
+{
+	1> As explained before, fill and initailise required extension names and count in global variable.
+	2> initialize struct VkApplicationInfo.
+	3> initialise struct VkInstanceCreateInfo by using information from step1 and step2
+	4> call vkCreateInstance() to get vkInstance in global variable and do error checking.
+}
+
+  5> destroy vkInstance in uninitialize().
+--------------------------------------------------------------------------------------------------------
+4> STEPS: Presetation Surface Steps
+--------------------------------------------------------------------------------------------------------
+STEPS>
+1> Declare a global varible to hold presentation surface object.
+2> Declare and memset platform specific windows, Linux, Android, etc surfaceCreateInfoStructure.
+3> Initialize it perticularly its hInstance and hwnd members
+4> Now Call vkCreateWin32SurfaceKHR() to create presentation surface object.
+5> Chages in uninitialize()
+
+--------------------------------------------------------------------------------------------------------
+5> STEPS: Get Physical Device
+--------------------------------------------------------------------------------------------------------
+1> Declare 3 global variables.
+	i>   For selected physical device.
+	ii>  For selected Queue Family Index
+	iii> For Physical Device's Properties(required in later steps)
+2> Call vkEnumeratePhysicalDevices() to get physical device count.
+3> Allocate VkPhysicalDeviceArray array according physical device count 
+4> Call vkEnumeratePhysicalDevices() again to fill above array (physical device names).
+5> Start Loop using physical device count and physical device array.
+	NOTE: Declare a boolean bFound variable before this loop which will decide whether we found desired physical device or not.
+	      Inside this Loop
+		  a> Declare a local varible to loop count.
+		  b> Call vkGetPhysicalDeviceQueueFamilyProperties() To initialize above queue count variable.
+		  c> Declare and allocate VkQueueFamilyPropertiesArray array according to above queue count variable.
+		  d> Call vkGetPhysicalDeviceQueueFamilyProperties() again to fill above array.
+		  e> Declare VkBool32 type array and allocate it using above queue count variable.
+		  f> start nested loop and fill VkBool32 type array By calling vkGetPhysicalDeviceSurfaceSupportKHR().
+		  g> start another nested(inside main)loop and check whether physical device in its array with its Queue family 
+		     "has" Graphics Bit or not.
+		     if yes then this is selected physical device. Assign it global variable.
+			 Similarly this index is selected queue family index, assign it to global variable also/too.
+			 and set bFound = TRUE and break from from second nested(inside main) loop. 
+		  h> Now we are back in main loop. So free the VkQueueFamilyPropertiesArray and VkBool32.
+		  i> still being in main loop according to bFound variable break out of main loop.
+		  j> Free physical device array.
+6> Do error checking according to bFound.
+7> memset the global physical device memory proprty structure.
+8> Initialize above structure with vkGetPhysicalDeviceMemoryProperties.
+9> Declare a local structure variable VkPhysicalDeviceFeatures. Memset it and initialize it by calling vkGetPhysicalDeviceFeatures().
+10> By using tissilation Shader member of above structure check selected device's tissilation shader property/support.
+11> By using geometry Shader member of above structure check selected device's geometry shader property/support.
+12> There is no need destroy/free/uninitialize selected physical device because, later we will create vulkan logical device 
+	which needs to be destroyed, which will destroy selected physical device.   
+--------------------------------------------------------------------------------------------------------
+6> STEPS: Print VK_INFO
+--------------------------------------------------------------------------------------------------------
+1> Remove local declaration of physical device count and physical device array and declare it globally, from getPhysicalDevice().
+2> Accordingly remove physical device array freeing code block from if(bFound == VK_TRUE) block, and we will later write 
+   this freeing code block in print vk info function.
+3> Write printVKInfo() user defined function with following steps:
+	a> Start a loop using global physical device count and inside it declare and memset VK_PHYSICAL_DEVICE_PROPERTIES 
+	structure variable.
+	b> Initialize this structure variable by calling vkGetPhysicalDeviceProperties vulkan API.
+	c> Print vulkan API version using "apiVersion" member of the structure. this requires 3 vulkan macros.
+	d> Print device name by using "deviceName" member of structure.
+	e> Use "deviceType" member of structure in a switch case block and accordingly print device type.
+	f> Print hexadecimal vendorID of device "vedorID" member of structure.
+	g> Print hexadecimal deviceID using "deviceID" member of structure.
+		NOTE: for sake of the completeness we can repeat step 5 (steps a tp h) from getPhysicalDevice() function.
+			  but now instead of assingning selected queue and selected device print wheher this device supports
+			  Graphics bit, compute bit, transfer bit using if-else-if blocks/ladder.
+			  similarly we also can repeat device fetures from get physical device function and 
+			  can print all around 50+ device features including tissilation and geometric shader support.
+	h> Free physical device array here which we removed from if(bFound == VK_TRUE) block of getPhysicalDevice().
+--------------------------------------------------------------------------------------------------------
+7> STEPS: Device Extensions
+--------------------------------------------------------------------------------------------------------
+Use the same logic/steps of getting instance extensions, we are going to retrive device extensions.
+
+--------------------------------------------------------------------------------------------------------
+8> STEPS: Vulkan Device
+--------------------------------------------------------------------------------------------------------
+1> Create userdefined function createVulkanDevice()
+2> Call previviously created fillDeviceExtensionNames() in it.
+3> Declare and initialize VkDeviceCreateInfoStructure.
+4> Use previously obtained device extension count and device extension array to initialize this structure.
+5> Now Call vkCreateDevice() vulkan API to create actual device and do error checking.
+6> Destroy this device when done. 
+	IMP NOTE: Before destroying the device ensure all operations on that device are finished. 
+			  Till that wait on that device.
+--------------------------------------------------------------------------------------------------------
+9> STEPS: Device Queue
+--------------------------------------------------------------------------------------------------------
+1> Call vkGetDeviceQueue() using newly created vkDevice, selected family index, 0th queue in that queue 
+   family.
+   NOTE: when we create vkdevice, vkqueue are created/constructed.
+		 if so we destroy vkdevice results release vkqueues.
+--------------------------------------------------------------------------------------------------------
+10> Surface Format And Color Space 
+--------------------------------------------------------------------------------------------------------
+1> Call vkGetPhysicalDeviceSurfaceFormatsKHR() to retrieve the count of supported color formats.
+2> Declare and allocate array of VkGetPhysicalDeviceSurfaceFormat
+	VK_COLOR_SPACE_SRGB_NONLINEAR_KHR
+	VK_FORMAT_B8G8R8A8_SRGB
+3> Call again vkGetPhysicalDeviceSurfaceFormatsKHR() to fill array.
+4> According to contents above filled array decide the surface color format and surface color space.
+5> free the allocated array.
+--------------------------------------------------------------------------------------------------------
+11>Presentation Mode
+--------------------------------------------------------------------------------------------------------
+1> Call vkGetPhysicalDeviceSurfacePresentModesKHR() to retrieve the count of supported presentation modes.
+2> Declare VkPresentModeKHR structure array varaible.
+3> Call again vkGetPhysicalDeviceSurfacePresentModesKHR() to fill VkPresentModeKHR array.
+4> According to contents above filled array decide the presentation mode.
+5> free the allocated array.
+--------------------------------------------------------------------------------------------------------
+12>Swapchain
+--------------------------------------------------------------------------------------------------------
+1> Get physical device Surface Format And Color Space using STEP-10.
+2> Get physical device surface capabilities by using vulkan API vkGetPhysicalDeviceSurfaceCapabilitiesKHR()
+   and accordingly initailise VkSurfaceCapabilitiesKHR structure.
+3> By using meanImageCount and maxImageCount members of above structure decide desired imageCount for Swapchain.
+   Note:
+4> By using currentExtent.width and currentExtent.height members of above structure and comparing them with
+   current width and height of window, and decide image width and image height of Swapchain
+5> Decide how we are going to use the swapchain images means whether we are going to store image data and 
+   use it later(Deffered Rendering) OR we are using it immediately as color attachment.
+6> swapchain is capable of storing transformed image before presentation which is called as pretransform.
+   while creating swapchain we can decide whether to pretransform or not(pretransform also include flipping).
+7> Get presentation mode for swapchain images using STEP-11.
+8> According above data declare, memset and initialize VkSwapchainCreateInfoKHR structure.
+9> At the end call vkCreateSwapchainKHR() to create the swapchain.
+10> when done destroy it uninitialize() by using vkDestroySwapchainKHR() API.
+--------------------------------------------------------------------------------------------------------
+13>Swapchain Images and Iamge Views
+--------------------------------------------------------------------------------------------------------
+1> Get Swapchain image count in global variable using vkGetSwapchainImagesKHR().
+2> Declare a variable VkImage data type array and allocate it to the swapchain image count using malloc.
+3> Now call the same function agian in step 1 and fill this array. 
+4> Declare another global array of type VkImageView and allocate it to the size of swapchain image count.
+5> Declare and initialize VkImageViewCreateInfo structure except its ".image" member.
+6> Now start a loop for swapchain Image count. and inside this loop initialize above ".image" member to the
+   swapchain image array 'i'th index obtained above. and then call vkCreateImageView() to fill above image 
+   view arrray.
+7> uninitialize-1: In uninitialize() keeping the destructor logic aside for a while first destroy swapchain 
+   images from the swapimages array in a loop using vkDestroySwapchainImage().
+8> In ---------- using free();
+9> uninitialize-2: In uninitialize() destroy imageviews in imageviewsarray in loop vkDestroyImageViews().
+10> now actually free imageviewsarray using free().
+--------------------------------------------------------------------------------------------------------
+14> Command Pool
+--------------------------------------------------------------------------------------------------------
+1> Declare and initialise VkCommandPool structure.
+2> call vkCretaeCommandPool() to create command Pool
+3> destroy command pool using vkDestroyCommandPool().
+--------------------------------------------------------------------------------------------------------
+15> Command Buffer
+--------------------------------------------------------------------------------------------------------
+1> Declare and Initialize struct VkCommandBuffersAllocateInfo.
+   NOTE:The number of command buffer are conventionally is equal to number of swapcian images.
+2> Declare a command buffer array globally and allocate it to the size of swapchain image count.
+3> In a loop which is equal to swapchain image count, allocate each command buffer in array by using
+   vkAllocateCommandBuffers() API. Remember at the time of allocation all the buffers are empty, later we
+   fill graphics or compute commands in it.
+4> In uninitialize free each command buffer vkFreeCommandBuffers() in a loop of swapchain image count size.
+5> free the actual command buffer array.
+--------------------------------------------------------------------------------------------------------
+16>Renderpass
+--------------------------------------------------------------------------------------------------------
+1> Declare and initialize VkAttachmentDescription structure array. although we have only one attachment
+   ie color attachment for this example we declare it as array.
+2> Declare and initialize VkAttachmentReference structure. which will have information about the attachment 
+   described above.
+3> Declare and initailise VkSubpassDescription structure and keep information about aboout VkAttachmentReference
+   structure.
+4> Declare and initailise VkRenderPassCreateInfo structure and refer VkAttachmentDescription and VkSubpassDescription
+   into it.
+   Remember here also we need attachment info in the form of image views which will be used by frame buffer later.
+   We also need to consider/specify interdependency between subpasses if needed.
+5> Now call vkCreateVulkanRenderPass() to create the actual renderpass.
+   Remember: 
+6> In uninitialize destroy renderpass by using vkDestroyRenderPass() API.
+--------------------------------------------------------------------------------------------------------
+17> Frame Buffers
+--------------------------------------------------------------------------------------------------------
+number of frame buffers should be equal to number of swapchain images.
+1> Declare an array of vkImageView equal to the number of attachments i.e. in our example it is 1.
+2> Declare and initailise VkFrameBufferCreateInfo structure.
+3> Allocate the FrameBuffer array by malloc to size of swapchain image count.
+4> Start a loop for swapchain image count and call vkCreateFrameBuffer() to create frame buffers.
+5> In uninitialize() destroy frame buffers in a loop till swapchain image count. 
+--------------------------------------------------------------------------------------------------------
+18-Fences-And-Semaphores
+--------------------------------------------------------------------------------------------------------
+1> Globally declare array of two fences of variables type pointer to VkFence. Additionally declare 2 semaphore 
+   objects of type VkSemaphores.
+2> In createSemaphore() declare, memset and initialize VkSemaphoreCreateInfo structure.
+3> Now Call vkCreateSemaphore() 2 times to create 2 semaphore objects.
+   Remember: Both will use same VkSemaphoreCreateInfo structure.
+4> In createFences() function declare, memset and initialize VkFencesCreateInfo structure.
+5> In this function createFences(), allocate global fence array to the size of swapchain image count using malloc.
+6> Now in a loop vkCreateFence() API to initialize global fences array.
+7> In uninitialize() first in a loop with swapchainImageCount as a counter destroy fence array objects using vkDestroyFence() API.
+   and then actually free the fences array by using free().
+8> Destroy both global semaphore objects with two separate calls vkDestroySemaphore() API.
+--------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
+"If You Understand Synchronisation In Vulkan, You Understand Vulkan"
+-------------------------------------------------------------------------------------------------------- 
+--------------------------------------------------------------------------------------------------------
+19-Build-Command-Buffers
+--------------------------------------------------------------------------------------------------------
+1> Start a loop with swapchainImageCount as a counter.
+2> Inside the loop vkResetCommandBuffer() API to reset the command buffers.
+3> Then declare memset initialise VkCommandBufferBiginInfo.
+4> Now call vkBiginCommandBuffer() to record vulkan drawing related commands. do error checking.
+5> Declare memset and initailise struct array of VkClearValue type.
+   Remember: Internally it is union.
+   Our array willbe of 1 element. this number is depends on the number of attachments to the frame buffers.
+   As we have only one attachment i.e. color attachment hence the 1 element.
+   It has two members ie.=> 
+   // Provided by VK_VERSION_1_0
+	typedef union VkClearValue {
+    	VkClearColorValue           color;
+    	VkClearDepthStencilValue    depthStencil;
+	} VkClearValue;
+	As we only have color attachment color value is meaningful and depthStencil member is meaningless.
+	When there will be depth attachment it will be reversed ie depthStencil value will be meaningful.
+
+	To this color member we need to assign VkClearColorValue structure value. To do this declare globally
+	VkClearColorValue structure varaible. memset and initailise it in initailise();
+	Remember: We are going to clear color member of VkClearValue structure by VkClearColorValue structure
+	because in steps for 16>Renderpass we specified the .loadOp member of VkAttachmentDescription structure
+	to VK_ATTACHMENT_LOAD_OP_CLEAR.
+6> Then declare memset and initialize VkRenderPassBeginInfo.
+7> Then begin renderpass by vkCmdBeginRenderPass() API.
+   Remember: The code written inside "beginrenderpass" and "endrenderpass" itself is code the of subpass if no subpass 
+   is explicitely created.
+   In other words even if no subpass is explicitely created there is always one subpass inside/for the renderpass.
+8> End renderpass by calling vkCmdEndRenderPass() API.
+9> End the recording of the command buffer by calling vkEndCommandBuffer() API.
+10> Close the loop.
+--------------------------------------------------------------------------------------------------------
