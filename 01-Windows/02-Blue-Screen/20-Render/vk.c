@@ -15,6 +15,7 @@
 #define WIN_WIDTH 800
 #define WIN_HIGHT 600
 
+//---------------------------------------------------------------------------------------------
 //vulkan related global variables
 //instance extension related
 uint32_t enabledInstanceExtensionCount = 0;
@@ -90,6 +91,7 @@ VkClearColorValue vkClearColorValue;
 BOOL bInitialized = FALSE;
 uint32_t currentImageIndex = UINT32_MAX;
 
+//---------------------------------------------------------------------------------------------
 //window procedure
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
@@ -137,7 +139,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
 	}
 	else
 	{
-		fprintf(gpFile, "\nDEBUG:Log File Created Successfully");
+		fprintf(gpFile, "\nDEBUG:[WinMain()][SUCCESS] Log File Created Successfully");
 	}
 
 	wsprintf(szAppName, TEXT("%s"), gpszAppName);
@@ -158,7 +160,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
 
 	//Registering above class
 	RegisterClassEx(&wndclass);
-	fprintf(gpFile, "\nDEBUG:Class Registered Successfully\n");
+	fprintf(gpFile, "\nDEBUG:[WinMain()][SUCCESS] Class Registered Successfully");
 	//SystemParametersInfo
 	SystemParametersInfo(SPI_GETWORKAREA, 0, &rect, 0);
 
@@ -168,7 +170,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
 	//creating window
 	hwnd = CreateWindowEx(	WS_EX_APPWINDOW,
 							szAppName,
-							TEXT("Vulkan: Vulkan Render Blue Screen"),
+							TEXT("Vulkan | 20-Render-Blue-Screen"),
 							WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_CLIPSIBLINGS | WS_VISIBLE,
 							HorPos,
 							VerPos,
@@ -179,7 +181,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
 							hInstance,
 							NULL);
 
-	fprintf(gpFile, "\nDEBUG:Window Created\n");
+	fprintf(gpFile, "\nDEBUG:[WinMain()][SUCCESS] CreateWindowEx() Done -> Window Created");
 
 	ghwnd = hwnd;
 	vkResult = initialize();
@@ -193,8 +195,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
 
 		
 	ShowWindow(hwnd, iCmdShow);
+	fprintf(gpFile, "\nDEBUG:[WINMAIN()][SUCCESS] ShowWindow()");
 	SetForegroundWindow(hwnd);
+	fprintf(gpFile, "\nDEBUG:[WINMAIN()][SUCCESS] SetForegroundWindow()");
 	SetFocus(hwnd);
+	fprintf(gpFile, "\nDEBUG:[WINMAIN()][SUCCESS] SetFocus()");
 
 	//MessageLoop
 	while(bDone == FALSE)
@@ -215,7 +220,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
 			{
 				//HERE YOU SHOULD CALL UPDATE FUNCTION FOR OPENGL RENDERING
 				//HERE YOU SHOULD CALL DISPLAY FUNCTION FOR OPENGL RENDERING
-				 display();
+				display();
 			}
 		}
 	}
@@ -226,7 +231,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
 LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 {
 	//function declarations
-	void ToggleFullscreen(void);
+	void toggleFullscreen(void);
 	void uninitialize(void);
 	void resize(int, int);
 
@@ -234,7 +239,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 	switch(iMsg)
 	{
 		case WM_CREATE:
-			fprintf(gpFile, "\nDEBUG:WM_CREATE Recieved");
+			fprintf(gpFile, "\nDEBUG:[WndProc()] WM_CREATE Recieved");
 			break;
 
 		case WM_SETFOCUS:
@@ -257,7 +262,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			{
 				case 0x46:
 				case 0x66:
-					ToggleFullscreen();
+					toggleFullscreen();
 					break;
 
 				case VK_ESCAPE:
@@ -274,13 +279,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			break;
 
 		case WM_QUIT:
-			fprintf(gpFile, "\nDEBUG:WM_QUIT Recieved");
+			fprintf(gpFile, "\nDEBUG:[WndProc()] WM_QUIT Recieved");
 			//uninitialize();
 			PostQuitMessage(0);
 			break;
 
 		case WM_DESTROY:
-			fprintf(gpFile, "\nDEBUG:WM_DESTROY Recieved");
+			fprintf(gpFile, "\nDEBUG:[WndProc()] WM_DESTROY Recieved");
 			uninitialize();
 			PostQuitMessage(0);
 			break;
@@ -289,7 +294,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 	return(DefWindowProc(hwnd, iMsg, wParam, lParam));
 }
 
-void ToggleFullscreen(void)
+void toggleFullscreen(void)
 {
 	//variable declarations
 	MONITORINFO mInfo = {sizeof(MONITORINFO)};
@@ -334,7 +339,7 @@ void ToggleFullscreen(void)
 }
 
 VkResult initialize(void)
-{	
+{
 	//function declarations
 	VkResult createVulkanInstance(void);
 	VkResult getSupportedSurface(void);
@@ -515,7 +520,7 @@ VkResult initialize(void)
 	fprintf(gpFile, "\nDEBUG:[initialize][SUCCESS] bInitialized = TRUE");
 
 	fprintf(gpFile, "\nDEBUG:------------------------------------Done [initialize()]------------------------------------\n\n");
-	return vkResult;	
+	return vkResult;
 }
 
 void resize(int width, int hight)
@@ -614,6 +619,7 @@ VkResult display(void)
 
 void uninitialize(void)
 {
+	//code
 	fprintf(gpFile, "\n\nDEBUG:------------------------------------Inside[uninitialize()]------------------------------------");
 	//closing file
 	if(gbFullscreen == TRUE)
@@ -629,8 +635,7 @@ void uninitialize(void)
 					SWP_NOMOVE | SWP_NOSIZE | SWP_NOOWNERZORDER | SWP_NOZORDER | SWP_FRAMECHANGED);
 		ShowCursor(TRUE);
 	}
-	
-
+		
 	//no need to destroy/uninitialise device queue
 	//destroy vulkan device
 	if(vkDevice)
@@ -720,8 +725,8 @@ void uninitialize(void)
 		//destroy image views
 		for(uint32_t i = 0; i < swapchainImageCount; i++)
 		{
-				vkDestroyImageView(vkDevice, swapchainImageView_array[i], NULL);
-				fprintf(gpFile, "\nDEBUG:[uninitialize()][SUCCESS] vkDestroyImageView() = %d", i);
+			vkDestroyImageView(vkDevice, swapchainImageView_array[i], NULL);
+			fprintf(gpFile, "\nDEBUG:[uninitialize()][SUCCESS] vkDestroyImageView() = %d", i);
 		}
 		
 		if(swapchainImageView_array)
@@ -747,7 +752,7 @@ void uninitialize(void)
 			swapchainImage_array = NULL;
 			fprintf(gpFile, "\nDEBUG:[uninitialize()][SUCCESS] swapchainImage_array freed");
 		}
-		
+
 		//destroy swapchain
 		if(vkSwapchainKHR)
 		{
@@ -777,15 +782,14 @@ void uninitialize(void)
 		vkInstance = VK_NULL_HANDLE;
 		fprintf(gpFile, "\nDEBUG:[uninitialize()][SUCCESS] vkDestroyInstance()");
 	}
-	
+
 	if(gpFile)
 	{
 		fprintf(gpFile, "\nDEBUG:------------------------------------Done [uninitialize()]------------------------------------\n");
-		fprintf(gpFile, "\nDEBUG:[uninitialize()]File Closed\n");
+		fprintf(gpFile, "\nDEBUG:[uninitialize()] Debug File Closed\n");
 		fclose(gpFile);
 		gpFile = NULL;
 	}
-
 }
 
 
@@ -795,10 +799,11 @@ void uninitialize(void)
 /////////////////////////////////////////////////////////////////////
 ------------------------------------------------------------------------------------------------------*/
 
+
 /*------------------------------------------------------------------------------------------------------
 3> STEPS: Instance Creation
 --------------------------------------------------------------------------------------------------------
-in initailise()
+in initialise()
 {
 	1> As explained before, fill and initailise required extension names and count in global variable.
 	2> initialize struct VkApplicationInfo.
@@ -944,7 +949,13 @@ VkResult fillInstanceExtensionNames(void)
 	//STEP 2
 	//2> Allocate and Fill struct VkExtensionProperties array corresponding to above count.
 	vkExtensionProperties_array = (VkExtensionProperties *)malloc(sizeof(VkExtensionProperties) * instanceExtensionCount);
-	//add error checking for malloc
+	if(vkExtensionProperties_array == NULL)
+	{
+		fprintf(gpFile, "\nDEBUG:[fillInstanceExtensionNames][ERROR] Failed to allocate memory for VkExtensionProperties array");
+		return VK_ERROR_OUT_OF_HOST_MEMORY; //return hardcoded failure
+	}
+	else
+		fprintf(gpFile, "\nDEBUG:[fillInstanceExtensionNames][SUCCESS] Memory allocated for VkExtensionProperties array");
 
 	vkResult = vkEnumerateInstanceExtensionProperties(NULL, &instanceExtensionCount, vkExtensionProperties_array);
 	if(vkResult != VK_SUCCESS)
@@ -960,10 +971,24 @@ VkResult fillInstanceExtensionNames(void)
 	char** instanceExtensionNames_array = NULL;
 
 	instanceExtensionNames_array = (char **) malloc (sizeof(char *) * instanceExtensionCount);
-	//add error checking for malloc()
+	if(instanceExtensionNames_array == NULL)
+	{
+		fprintf(gpFile, "\nDEBUG:[fillInstanceExtensionNames][ERROR] Failed to allocate memory for instanceExtensionNames_array");
+		return VK_ERROR_OUT_OF_HOST_MEMORY; //return hardcoded failure
+	}
+	else
+		fprintf(gpFile, "\nDEBUG:[fillInstanceExtensionNames][SUCCESS] Memory allocated for instanceExtensionNames_array");
+	
 	for(uint32_t i = 0; i < instanceExtensionCount; i++)
 	{
 		instanceExtensionNames_array[i] = (char *)malloc(sizeof(char) * strlen(vkExtensionProperties_array[i].extensionName) + 1);
+		if(instanceExtensionNames_array[i] == NULL)
+		{
+			fprintf(gpFile, "\nDEBUG:[fillInstanceExtensionNames][ERROR] Failed to allocate memory for instanceExtensionNames_array[%d]", i);
+			return VK_ERROR_OUT_OF_HOST_MEMORY; //return hardcoded failure
+		}
+				
+		//copy extension name from vkExtensionProperties_array to instanceExtensionNames_array
 		memcpy(instanceExtensionNames_array[i], vkExtensionProperties_array[i].extensionName, strlen(vkExtensionProperties_array[i].extensionName) + 1);
 		fprintf(gpFile, "\nDEBUG:[fillInstanceExtensionNames][INFO] Vulkan instance Extension Name[%d] = %s", i, instanceExtensionNames_array[i]);
 	}
@@ -1126,11 +1151,11 @@ VkResult getSupportedSurface(void)
 --------------------------------------------------------------------------------------------------------*/
 VkResult getPhysicalDevice(void)
 {
-	//variable declaration
+	//variable declarations
 	VkResult vkResult = VK_SUCCESS;
 
 	//code
-	fprintf(gpFile, "\n\nDEBUG:------------------------------------Inside[getPhysicalDevice()]------------------------------------");	
+	fprintf(gpFile, "\n\nDEBUG:------------------------------------Inside[getPhysicalDevice()]------------------------------------");
 
 	vkResult = vkEnumeratePhysicalDevices(vkInstance, &physicalDeviceCount, NULL);
 	if(vkResult != VK_SUCCESS)
@@ -1147,20 +1172,31 @@ VkResult getPhysicalDevice(void)
 	else
 		fprintf(gpFile, "\nDEBUG:[getPhysicalDevice][SUCCESS] vkEnumeratePhysicalDevices() First Call");
 
-	
+	//3> Allocate VkPhysicalDeviceArray array according physical device count
 	vkPhysicalDevice_array = (VkPhysicalDevice *)malloc(physicalDeviceCount * sizeof(VkPhysicalDevice));
-	//handle malloc error checking
+	if(vkPhysicalDevice_array == NULL)
+	{
+		fprintf(gpFile, "\nDEBUG:[getPhysicalDevice][ERROR] Failed to allocate memory for vkPhysicalDevice_array");
+		vkResult = VK_ERROR_OUT_OF_HOST_MEMORY; //return hardcoded failure
+		return vkResult;
+	}
+	else
+		fprintf(gpFile, "\nDEBUG:[getPhysicalDevice][SUCCESS] Memory allocated for vkPhysicalDevice_array");
 
+	//4> Call vkEnumeratePhysicalDevices() again to fill above array (physical device names).
 	vkResult = vkEnumeratePhysicalDevices(vkInstance, &physicalDeviceCount, vkPhysicalDevice_array);
 	if(vkResult != VK_SUCCESS)
 	{	
 		fprintf(gpFile, "\nDEBUG:[getPhysicalDevice][ERROR] Failed vkEnumeratePhysicalDevices() Second Call");
+		vkResult = VK_ERROR_INITIALIZATION_FAILED;
 		return vkResult;
 	}
 	else
 		fprintf(gpFile, "\nDEBUG:[getPhysicalDevice][SUCCESS] vkEnumeratePhysicalDevices() Second Call");
 
 	
+	//5> Start Loop using physical device count and physical device array.
+	//NOTE: Declare a boolean bFound variable before this loop which will decide whether we found desired physical device or not.
 	VkBool32 bFound = VK_FALSE;
 	for(uint32_t i = 0; i < physicalDeviceCount; i++)
 	{
@@ -1171,12 +1207,23 @@ VkResult getPhysicalDevice(void)
 		
 		VkQueueFamilyProperties *vkQueueFamilyProperties_array = NULL;
 		vkQueueFamilyProperties_array = (VkQueueFamilyProperties *)malloc(queueCount * sizeof(VkQueueFamilyProperties));
-		//handle malloc error checking.
+		if(vkQueueFamilyProperties_array == NULL)
+		{
+			fprintf(gpFile, "\nDEBUG:[getPhysicalDevice][ERROR] Failed to allocate memory for vkQueueFamilyProperties_array");
+			vkResult = VK_ERROR_OUT_OF_HOST_MEMORY; //return hardcoded failure
+			return vkResult;
+		}
 
 		vkGetPhysicalDeviceQueueFamilyProperties(vkPhysicalDevice_array[i], &queueCount, vkQueueFamilyProperties_array);
 
 		VkBool32 *isQueueSurfaceSupported_array = NULL;
 		isQueueSurfaceSupported_array = (VkBool32 *)malloc(queueCount * sizeof(VkBool32));
+		if(isQueueSurfaceSupported_array == NULL)
+		{
+			fprintf(gpFile, "\nDEBUG:[getPhysicalDevice][ERROR] Failed to allocate memory for isQueueSurfaceSupported_array");
+			vkResult = VK_ERROR_OUT_OF_HOST_MEMORY; //return hardcoded failure
+			return vkResult;
+		}
 
 		for(uint32_t j = 0; j < queueCount; j++)
 		{
@@ -1185,13 +1232,16 @@ VkResult getPhysicalDevice(void)
 
 		for(uint32_t j = 0; j < queueCount; j++)
 		{
-			if(vkQueueFamilyProperties_array[i].queueFlags & VK_QUEUE_GRAPHICS_BIT)
+			if(vkQueueFamilyProperties_array[j].queueFlags & VK_QUEUE_GRAPHICS_BIT)
 			{
 				if(isQueueSurfaceSupported_array[j] == VK_TRUE)
 				{
 					vkPhysicalDevice_Selected = vkPhysicalDevice_array[i];
 					graphicsQueueFamilyIndex_Selected = j;
 					bFound = VK_TRUE;
+					fprintf(gpFile, "\nDEBUG:[getPhysicalDevice][SUCCESS] Graphics enabled vkPhysicalDevice_Selected index = %d", i);
+					fprintf(gpFile, "\nDEBUG:[getPhysicalDevice][SUCCESS] Graphics enabled graphicsQueueFamilyIndex_Selected index = %d", graphicsQueueFamilyIndex_Selected);
+					break;
 				}
 			}
 		}
@@ -1216,22 +1266,26 @@ VkResult getPhysicalDevice(void)
 
 	if(bFound == VK_TRUE)
 	{
-		fprintf(gpFile, "\nDEBUG:[getPhysicalDevice][SUCCESS] with graphics enabled");
-		
+		fprintf(gpFile, "\nDEBUG:[getPhysicalDevice][SUCCESS] Graphics enabled vkPhysicalDevice_Selected index= %d", graphicsQueueFamilyIndex_Selected);
+		fprintf(gpFile, "\nDEBUG:[getPhysicalDevice][SUCCESS] Graphics enabled graphicsQueueFamilyIndex_Selected = %d", graphicsQueueFamilyIndex_Selected);
+
+		fprintf(gpFile, "\nDEBUG:[getPhysicalDevice][SUCCESS] Found graphics enabled physical device");
 	}
 	else
 	{
 		free(vkPhysicalDevice_array);
 		vkPhysicalDevice_array = NULL;
 		fprintf(gpFile, "\nDEBUG:[getPhysicalDevice][Failed] with graphics enabled");
-		return VK_ERROR_INITIALIZATION_FAILED;
+		vkResult = VK_ERROR_INITIALIZATION_FAILED;
+		return vkResult;
 	}
 
+	//8>get physical device memory properties
 	memset((void *)&vkPhysicalDeviceMemoryProperties, 0, sizeof(VkPhysicalDeviceMemoryProperties));
 
 	vkGetPhysicalDeviceMemoryProperties(vkPhysicalDevice_Selected, &vkPhysicalDeviceMemoryProperties);
 
-
+	//9> Declare a local structure variable VkPhysicalDeviceFeatures. Memset it and initialize it by calling vkGetPhysicalDeviceFeatures().
 	VkPhysicalDeviceFeatures vkPhysicalDeviceFeatures;
 
 	memset((void *)&vkPhysicalDeviceFeatures, 0, sizeof(VkPhysicalDeviceFeatures));
@@ -1349,9 +1403,8 @@ VkResult printVkInfo(void)
 		fprintf(gpFile, "\nDEBUG:[printVkInfo][SUCCESS] Free vkPhysicalDevice_array");
 	}
 	
-	fprintf(gpFile, "\nDEBUG:------------------------------------Done [printVkInfo()]------------------------------------\n");	
+	fprintf(gpFile, "\nDEBUG:------------------------------------Done [printVkInfo()]------------------------------------\n");
 	return vkResult;
-
 }
 /*----------------------------------------------------------------------------------------------------*/
 
@@ -1503,7 +1556,6 @@ VkResult createVulkanDevice(void)
 	else
 		fprintf(gpFile, "\nDEBUG:[cretaeVulkanDevice][SUCCESS] fillDeviceExtensionNames()");
 
-
 	VkQueue presentQueue;
 	float presentqueuePriority[1] = {1.0f};
 
@@ -1517,7 +1569,6 @@ VkResult createVulkanDevice(void)
 	VkDeviceCreateInfo vkDeviceCreateInfo;
 	memset((void*)&vkDeviceCreateInfo, 0, sizeof(VkDeviceCreateInfo));
 
-
 	vkDeviceCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
 	vkDeviceCreateInfo.pNext = NULL;
 	vkDeviceCreateInfo.flags = 0;
@@ -1529,7 +1580,6 @@ VkResult createVulkanDevice(void)
 	vkDeviceCreateInfo.queueCreateInfoCount = 1;
 	vkDeviceCreateInfo.pQueueCreateInfos = &vkQueueCreateInfo;
 
-
 	vkResult = vkCreateDevice(vkPhysicalDevice_Selected, &vkDeviceCreateInfo, NULL, &vkDevice);
 	if(vkResult != VK_SUCCESS)
 	{	
@@ -1539,7 +1589,7 @@ VkResult createVulkanDevice(void)
 	else
 		fprintf(gpFile, "\nDEBUG:[cretaeVulkanDevice][SUCCESS] vkCreateDevice()");
 
-		fprintf(gpFile, "\nDEBUG:------------------------------------Done [createVulkanDevice()]------------------------------------\n");
+	fprintf(gpFile, "\nDEBUG:------------------------------------Done [createVulkanDevice()]------------------------------------\n");
 	return vkResult;
 }
 /*----------------------------------------------------------------------------------------------------*/
@@ -2023,7 +2073,6 @@ VkResult createImagesAndImageViews(void)
 --------------------------------------------------------------------------------------------------------*/
 VkResult createCommandPool(void)
 {
-
 	//variable declaration
 	VkResult vkResult = VK_SUCCESS;
 
@@ -2038,17 +2087,15 @@ VkResult createCommandPool(void)
 	vkCommondPoolInfo.queueFamilyIndex = graphicsQueueFamilyIndex_Selected;
 
 	vkResult = vkCreateCommandPool(vkDevice, &vkCommondPoolInfo, NULL, &vkCommandPool);
-		if(vkResult != VK_SUCCESS)
-		{	
-			fprintf(gpFile, "\nDEBUG:[createCommandPool][ERROR] Failed vkCreateCommandPool()");
-			return vkResult;
-		}
-		else
-		{
-			fprintf(gpFile, "\nDEBUG:[createCommandPool][SUCCESS] vkCreateCommandPool()");
-		}
-
-
+	if(vkResult != VK_SUCCESS)
+	{	
+		fprintf(gpFile, "\nDEBUG:[createCommandPool][ERROR] Failed vkCreateCommandPool()");
+		return vkResult;
+	}
+	else
+	{
+		fprintf(gpFile, "\nDEBUG:[createCommandPool][SUCCESS] vkCreateCommandPool()");
+	}
 
 	fprintf(gpFile, "\nDEBUG:------------------------------------Done [createCommandPool()]------------------------------------\n");
 	return vkResult;
@@ -2074,7 +2121,7 @@ VkResult createCommandBuffers(void)
 	VkResult vkResult = VK_SUCCESS;
 
 	//code
-	fprintf(gpFile, "\n\nDEBUG:------------------------------------Inside[createCommandPool()]------------------------------------");
+	fprintf(gpFile, "\n\nDEBUG:------------------------------------Inside[createCommandBuffers()]------------------------------------");
 	//1> Declare and Initialize struct VkCommandBuffersAllocateInfo.
 	//NOTE:The number of command buffer are conventionally is equal to number of swapcian images.
 	VkCommandBufferAllocateInfo vkCommandBufferAllocateInfo;
@@ -2104,7 +2151,7 @@ VkResult createCommandBuffers(void)
 		}
 	}
 
-	fprintf(gpFile, "\nDEBUG:------------------------------------Done [createCommandPool()]------------------------------------\n");
+	fprintf(gpFile, "\nDEBUG:------------------------------------Done [createCommandBuffers()]------------------------------------\n");
 	return vkResult;
 }
 /*--------------------------------------------------------------------------------------------------------*/
@@ -2509,3 +2556,4 @@ VkResult buildCommandBuffers(void)
 	return vkResult;
 }
 /*--------------------------------------------------------------------------------------------------------*/
+

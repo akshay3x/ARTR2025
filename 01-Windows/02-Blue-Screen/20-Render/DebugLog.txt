@@ -1,10 +1,8 @@
 
-DEBUG:Log File Created Successfully
-DEBUG:Class Registered Successfully
-
-DEBUG:WM_CREATE Recieved
-DEBUG:Window Created
-
+DEBUG:[WinMain()][SUCCESS] Log File Created Successfully
+DEBUG:[WinMain()][SUCCESS] Class Registered Successfully
+DEBUG:[WndProc()] WM_CREATE Recieved
+DEBUG:[WinMain()][SUCCESS] CreateWindowEx() Done -> Window Created
 
 DEBUG:------------------------------------Inside[initialize()]------------------------------------
 
@@ -12,7 +10,9 @@ DEBUG:------------------------------------Inside[createVulkanInstance()]--------
 
 DEBUG:------------------------------------Inside[fillInstanceExtensionNames()]------------------------------------
 DEBUG:[fillInstanceExtensionNames][SUCCESS] vkEnumerateInstanceExtensionProperties() first call
+DEBUG:[fillInstanceExtensionNames][SUCCESS] Memory allocated for VkExtensionProperties array
 DEBUG:[fillInstanceExtensionNames][SUCCESS] vkEnumerateInstanceExtensionProperties() Second call
+DEBUG:[fillInstanceExtensionNames][SUCCESS] Memory allocated for instanceExtensionNames_array
 DEBUG:[fillInstanceExtensionNames][INFO] Vulkan instance Extension Name[0] = VK_KHR_surface
 DEBUG:[fillInstanceExtensionNames][INFO] Vulkan instance Extension Name[1] = VK_KHR_win32_surface
 DEBUG:[fillInstanceExtensionNames][INFO] Vulkan instance Extension Name[2] = VK_KHR_external_memory_capabilities
@@ -52,10 +52,15 @@ DEBUG:[initialize][SUCCESS] getSupportedSurface()
 
 DEBUG:------------------------------------Inside[getPhysicalDevice()]------------------------------------
 DEBUG:[getPhysicalDevice][SUCCESS] vkEnumeratePhysicalDevices() First Call
+DEBUG:[getPhysicalDevice][SUCCESS] Memory allocated for vkPhysicalDevice_array
 DEBUG:[getPhysicalDevice][SUCCESS] vkEnumeratePhysicalDevices() Second Call
+DEBUG:[getPhysicalDevice][SUCCESS] Graphics enabled vkPhysicalDevice_Selected index = 0
+DEBUG:[getPhysicalDevice][SUCCESS] Graphics enabled graphicsQueueFamilyIndex_Selected index = 0
 DEBUG:[getPhysicalDevice][SUCCESS] Free isQueueSurfaceSupported_array
 DEBUG:[getPhysicalDevice][SUCCESS] Free vkQueueFamilyProperties_array
-DEBUG:[getPhysicalDevice][SUCCESS] with graphics enabled
+DEBUG:[getPhysicalDevice][SUCCESS] Graphics enabled vkPhysicalDevice_Selected index= 0
+DEBUG:[getPhysicalDevice][SUCCESS] Graphics enabled graphicsQueueFamilyIndex_Selected = 0
+DEBUG:[getPhysicalDevice][SUCCESS] Found graphics enabled physical device
 DEBUG:[getPhysicalDevice][INFO] Selected Physical Device Support Tissilation Shader
 DEBUG:[getPhysicalDevice][INFO] Selected Physical Device Support Geometry Shader
 DEBUG:------------------------------------Done [getPhysicalDevice()]------------------------------------
@@ -354,10 +359,10 @@ DEBUG:------------------------------------Done [createCommandPool()]------------
 
 DEBUG:[initialize][SUCCESS] createCommandPool()
 
-DEBUG:------------------------------------Inside[createCommandPool()]------------------------------------
+DEBUG:------------------------------------Inside[createCommandBuffers()]------------------------------------
 DEBUG:[createCommandBuffers][SUCCESS] vkAllocateCommandBuffers() i = 0
 DEBUG:[createCommandBuffers][SUCCESS] vkAllocateCommandBuffers() i = 1
-DEBUG:------------------------------------Done [createCommandPool()]------------------------------------
+DEBUG:------------------------------------Done [createCommandBuffers()]------------------------------------
 
 DEBUG:[initialize][SUCCESS] createCommandBuffers()
 
@@ -404,6 +409,9 @@ DEBUG:------------------------------------Done [initialize()]-------------------
 
 
 DEBUG:[WINMAIN][SUCCESS] initialize()
+DEBUG:[WINMAIN()][SUCCESS] ShowWindow()
+DEBUG:[WINMAIN()][SUCCESS] SetForegroundWindow()
+DEBUG:[WINMAIN()][SUCCESS] SetFocus()
 DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
 DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
 DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
@@ -455,498 +463,7 @@ DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
 DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
 DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
 DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:[display][ERROR] Failed vkQueuePresentKHR() = -1000001004
-DEBUG:WM_DESTROY Recieved
+DEBUG:[WndProc()] WM_DESTROY Recieved
 
 DEBUG:------------------------------------Inside[uninitialize()]------------------------------------
 DEBUG:[uninitialize()][SUCCESS] vkDeviceWaitIdle()
@@ -972,4 +489,4 @@ DEBUG:[uninitialize()][SUCCESS] vkDestroyDevice()
 DEBUG:[uninitialize()][SUCCESS] vkDestroyInstance()
 DEBUG:------------------------------------Done [uninitialize()]------------------------------------
 
-DEBUG:[uninitialize()]File Closed
+DEBUG:[uninitialize()] Debug File Closed
