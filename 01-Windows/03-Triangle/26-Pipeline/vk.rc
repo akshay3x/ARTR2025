@@ -1,0 +1,4 @@
+#include "vk.h"
+
+MYICON ICON ARC.ICO
+
